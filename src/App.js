@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import { NavLink, Route, Switch } from "react-router-dom";
+import { NavLink, Route, Switch, Redirect } from "react-router-dom";
 import { Layout, Menu } from 'antd';
 import {
   MenuUnfoldOutlined,
@@ -85,6 +85,7 @@ function App() {
             <Route path='/colors/:id' exact component={Color} />
             <Route path='/colors' exact component={ListItems} />
             <Route path='/error' exact component={Error} />
+            <Redirect to='/error' />
           </Switch>
         </Content>
       </Layout>
