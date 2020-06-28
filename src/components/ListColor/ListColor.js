@@ -55,6 +55,7 @@ const ListItems = () => {
         response.data.data.forEach((item, index) => item.key = index);
         setList(response.data.data)
       })
+      .catch((error) => console.log(error))
       .finally(() => setLoading(false))
   }
 

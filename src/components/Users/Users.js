@@ -27,6 +27,7 @@ const Users = () => {
     await axios.delete(url)
       .then((response) => {
         if (response.status === 204) {
+          console.log(response);
           const arr = users.filter((item) => item.id !== id);
           setUsers(arr)
         } else {

@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
-import { NavLink, Route, Switch, Redirect } from "react-router-dom";
+import { NavLink, Route, Switch, Redirect } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
 import {
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
   AppstoreOutlined,
   FileTextOutlined,
   TeamOutlined,
@@ -22,60 +20,38 @@ import Error from './components/Error/Error';
 
 function App() {
 
-  const { Header, Sider, Content } = Layout;
-
-  const [collapsed, setCollapsed] = useState(false);
-
-  const toggle = () => {
-    setCollapsed(!collapsed);
-  };
+  const { Header, Content } = Layout;
 
   return (
     <Layout>
-      <Sider trigger={null} collapsible collapsed={collapsed}>
-        <Menu theme='dark' mode='inline'>
-          <div className='logo'></div>
-          <Menu.Item key='/' icon={<AppstoreOutlined />}>
+      <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
+        <Menu theme='dark' mode='horizontal' defaultSelectedKeys={[localStorage.getItem('key') || '1']} onSelect={({ key }) => {
+          localStorage.setItem('key', key)
+        }} >
+          <Menu.Item key='1' icon={<AppstoreOutlined />}>
             <NavLink to='/'>
               Главная
-            </NavLink>
+             </NavLink>
           </Menu.Item>
-
-          <Menu.Item key='/users' icon={<TeamOutlined />}>
+          <Menu.Item key='2' icon={<TeamOutlined />}>
             <NavLink to='/users'>
               Список пользователей
-            </NavLink>
+             </NavLink>
           </Menu.Item>
-
-          <Menu.Item key='/adduser' icon={<ContactsOutlined />}>
+          <Menu.Item key='3' icon={<ContactsOutlined />}>
             <NavLink to='/adduser'>
               Добавить пользователя
-            </NavLink>
+             </NavLink>
           </Menu.Item>
-
-          <Menu.Item key='/colors' icon={<FileTextOutlined />}>
+          <Menu.Item key='4' icon={<FileTextOutlined />}>
             <NavLink to='/colors'>
-              Список
-            </NavLink>
+              Список цветов
+             </NavLink>
           </Menu.Item>
-
         </Menu>
-      </Sider>
-      <Layout className='site-layout'>
-        <Header className='site-layout-background' style={{ padding: '0 16px' }}>
-          {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-            className: 'trigger',
-            onClick: toggle,
-          })}
-        </Header>
-        <Content
-          className='site-layout-background'
-          style={{
-            margin: '24px 16px',
-            padding: 24,
-            minHeight: 280,
-          }}
-        >
+      </Header>
+      <Content className='site-layout' style={{ padding: '25px', marginTop: 64, height: 'calc(100vh - 65px)' }}>
+        <div className='site-layout-background' style={{ padding: 24, minHeight: '100%', height: '100%' }}>
           <Switch>
             <Route path='/' exact component={Main} />
             <Route path='/users/:id' exact component={User} />
@@ -87,8 +63,8 @@ function App() {
             <Route path='/error' exact component={Error} />
             <Redirect to='/error' />
           </Switch>
-        </Content>
-      </Layout>
+        </div>
+      </Content>
     </Layout>
   );
 }

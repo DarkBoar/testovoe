@@ -30,8 +30,13 @@ const AddUsers = () => {
     }
 
     axios.post(url, user)
-      .then(response => console.log(response))
-      .then(() => setSuccess(true))
+      .then(response => {
+        if (response.status === 201) {
+          console.log(response);
+          setSuccess(true);
+        }
+      })
+      .catch((error) => console.log(error))
   };
 
   const field = (name, label, rules, input) => {
@@ -68,13 +73,13 @@ const AddUsers = () => {
         <h1>Add user</h1>
       </Form.Item>
       {field(
-        'username',
-        'Username',
-        [{ required: true, message: 'Please input your username!' }])
+        'name',
+        'Name',
+        [{ required: true, message: 'Please input your name!' }])
       }
       {field(
         'Job',
-        'job',
+        'Job',
         [{ required: true, message: 'Please input your job!' }])
       }
       <Form.Item {...tailLayout}>

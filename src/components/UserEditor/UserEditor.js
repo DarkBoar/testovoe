@@ -26,12 +26,16 @@ const UserEditor = (props) => {
     const url = `https://reqres.in/api/users/${id}`;
     const user = {
       job: values.Job,
-      name: values.username,
+      name: values.name,
     }
 
     axios.put(url, user)
-      .then(response => console.log(response))
-      .then(() => setSuccess(true))
+      .then((response) => {
+        if (response.status === 200) {
+          console.log(response);
+          setSuccess(true);
+        }
+      })
   };
 
   const field = (name, label, rules, input) => {
@@ -68,13 +72,13 @@ const UserEditor = (props) => {
         <h1>User editor</h1>
       </Form.Item>
       {field(
-        'username',
-        'Username',
-        [{ required: true, message: 'Please input your username!' }])
+        'name',
+        'Name',
+        [{ required: true, message: 'Please input your name!' }])
       }
       {field(
         'Job',
-        'job',
+        'Job',
         [{ required: true, message: 'Please input your job!' }])
       }
       <Form.Item {...tailLayout}>
