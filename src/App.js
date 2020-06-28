@@ -17,6 +17,7 @@ import User from './components/User/User';
 import ListItems from './components/ListColor/ListColor';
 import UserEditor from './components/UserEditor/UserEditor';
 import Color from './components/ListColor/Color/Color';
+import Error from './components/Error/Error';
 
 
 function App() {
@@ -83,6 +84,7 @@ function App() {
             <Route path='/adduser' exact component={AddUsers} />
             <Route path='/colors/:id' exact component={Color} />
             <Route path='/colors' exact component={ListItems} />
+            <Route path='/error' exact component={Error} />
           </Switch>
         </Content>
       </Layout>

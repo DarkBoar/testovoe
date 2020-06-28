@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Card, Spin, Result, Button } from 'antd';
-import { Link } from 'react-router-dom';
+import { Card, Spin } from 'antd';
+import { Redirect } from 'react-router-dom';
 import classes from './Color.module.css';
 
 const Color = (props) => {
@@ -26,12 +26,7 @@ const Color = (props) => {
 
   if (error) {
     return (
-      <Result
-        status='404'
-        title='404'
-        subTitle='Sorry, the page you visited does not exist.'
-        extra={<Link to='/'><Button type='primary'>Back Home</Button></Link>}
-      />
+      <Redirect to='/error' />
     )
   }
 
@@ -41,7 +36,7 @@ const Color = (props) => {
 
   return (
     <div className={classes.color}>
-      <h2>{ color.name }</h2>
+      <h2>{color.name}</h2>
       <Card
         hoverable
         style={{ width: 240 }}

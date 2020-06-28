@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Card, Skeleton, Result, Button } from 'antd';
+import { Card, Skeleton } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 
 
 const User = (props) => {
@@ -27,12 +27,7 @@ const User = (props) => {
 
   if (error) {
     return (
-      <Result
-        status='404'
-        title='404'
-        subTitle='Sorry, the page you visited does not exist.'
-        extra={<Link to='/'><Button type='primary'>Back Home</Button></Link>}
-      />
+      <Redirect to='/error' />
     )
   }
 
